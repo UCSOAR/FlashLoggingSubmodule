@@ -10,6 +10,7 @@
 #define FLASHLOGGINGMODULE_INC_LOGCONSTS_HPP_
 
 #include <cstdint>
+#include "CubeDefines.hpp"
 
 constexpr uint32_t RAM_LOG_SIZE = 512; //bytes
 constexpr uint32_t SECTOR_READ = 4096;

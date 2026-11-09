@@ -5,5 +5,40 @@
  *      Author: josh wall
  */
 
-#include "LogConsts.hpp"
+#include "FlashCursor.hpp"
 
+uint16_t FlashCursor::getCursorSectorAddress() const
+{
+    return flashSectorAddress;
+}
+
+uint8_t FlashCursor::getCursorSectorIndex() const
+{
+    return flashSectorIndex;
+}
+
+bool FlashCursor::advanceCursor()
+{
+    if (flashSectorAddress == 4093 && flashSectorIndex == 7)
+    {
+        SOAR_PRINT("Cursor position: (%u, %u).\n", (unsigned int)flashSectorAddress, (unsigned int)flashSectorIndex);
+        SOAR_PRINT("Flash storage is full.");
+
+        return false;
+    }
+
+    if (flashSectorIndex == 7)
+    {
+        flashSectorIndex = 0;
+        flashSectorAddress++;
+        SOAR_PRINT("Cursor position: (%u, %u).\n", (unsigned int)flashSectorAddress, (unsigned int)flashSectorIndex);
+    }
+
+    else
+    {
+        flashSectorIndex++;
+        SOAR_PRINT("Cursor position: (%u, %u).\n", (unsigned int)flashSectorAddress, (unsigned int)flashSectorIndex);
+    }
+
+    return true;
+}
