@@ -7,6 +7,7 @@
 
 #include "FlashCursor.hpp"
 
+
 uint16_t FlashCursor::getCursorSectorAddress() const
 {
     return flashSectorAddress;
@@ -19,7 +20,7 @@ uint8_t FlashCursor::getCursorSectorIndex() const
 
 bool FlashCursor::advanceCursor()
 {
-    if (flashSectorAddress == 4093 && flashSectorIndex == 7)
+    if (flashSectorAddress == SECTORS_IN_USE && flashSectorIndex == INDEXES_IN_USE)
     {
         SOAR_PRINT("Cursor position: (%u, %u).\n", (unsigned int)flashSectorAddress, (unsigned int)flashSectorIndex);
         SOAR_PRINT("Flash storage is full.");
@@ -27,7 +28,7 @@ bool FlashCursor::advanceCursor()
         return false;
     }
 
-    if (flashSectorIndex == 7)
+    if (flashSectorIndex == INDEXES_IN_USE)
     {
         flashSectorIndex = 0;
         flashSectorAddress++;

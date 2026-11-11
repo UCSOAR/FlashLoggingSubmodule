@@ -18,8 +18,8 @@ public:
     FlashCursor(uint16_t sectorAddress, uint8_t sectorIndex)
         : flashSectorAddress(sectorAddress), flashSectorIndex(sectorIndex)
     {
-        SOAR_ASSERT(sectorAddress <= 4093, "Invalid sector address !(0-4093).\n");
-        SOAR_ASSERT(sectorIndex <= 7, "Invalid sector index !(0-7).\n");
+        SOAR_ASSERT(sectorAddress <= SECTORS_IN_USE, "Invalid sector address.\n");
+        SOAR_ASSERT(sectorIndex <= INDEXES_IN_USE, "Invalid sector index.\n");
     }
 
     uint16_t getCursorSectorAddress() const;
@@ -27,8 +27,8 @@ public:
     bool advanceCursor();
 
 private:
-    uint16_t flashSectorAddress = 0; // 0 - 4093 with 4095 reserved for flash cursor and 4094 for testing
-    uint8_t flashSectorIndex = 0;    // 0 - 7
+    uint16_t flashSectorAddress = 0; // VALID: [0, SECTORS_IN_USE]
+    uint8_t flashSectorIndex = 0;    // VALID: [0, INDEXES_IN_USE]
 };
 
 #endif
